@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="stylesheet/ABAPCodeReview.css" media="screen" rel="stylesheet" type="text/css">
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://svn.apache.org/repos/asf/couchdb/trunk/share/www/script/jquery.couch.js"></script>
+    <script src="javascript/ABAPCodeReview.js"></script>
+</head>
+<body>
+	<div id="ABAPCodeReview">Loading...</div>
+	
+	<script type="text/javascript">
+	  $db = $.couch.db("codereview");
+
+      function getActivity(){
+        $db.view("app/byActivityId",{
+            key: 'iFH4nlrLgNW0Y-xrtI0L1M', 
+        success: function(data){
+	    
+			      var activity = data.rows[0].value;
+			
+			      var innerHTML = '<div class="SourceCode"><table cellpadding="0" cellspacing="0" class="lines"><tbody><tr>';
+
+			      // Build Source Code Table
+			      var linenumbersPRE = '<td><pre class="LineNumbers">';
+			      var revisionlinenumbersPRE = '<td><pre class="LineNumbers">';
+			      var sourcelinesPRE = '<td width="100%"><div class="CodeLines"><pre>';
+
+			      activity.sourcecode.forEach(function(sourcecodeline){
+				
+				    if(sourcecodeline.revisionType){
+					
+						switch(sourcecodeline.revisionType) {
+						 case "changed":
+					       linenumbersPRE = linenumbersPRE + '<div class="LineNumber"><br></div>';
+
+				          revisionlinenumbersPRE = revisionlinenumbersPRE + '<div class="LineNumber"><span id="RL' + sourcecodeline.revisionDetail.linenumber + '">' 
+				                                                        + sourcecodeline.revisionDetail.linenumber + '</span></div>';
+
+  				          linenumbersPRE = linenumbersPRE + '<div class="LineNumber"><span id="L' + sourcecodeline.linenumber +
+				                                          '" rel="#L' + sourcecodeline.linenumber + '" onClick="codeLineSelected(\'LC' +
+				                                          sourcecodeline.linenumber + '\')">' + sourcecodeline.linenumber + 
+				                                          '</span></div>';
+				          revisionlinenumbersPRE = revisionlinenumbersPRE + '<div class="LineNumber"><br></div>';
+						  break;
+						
+						case "deleted":
+						   linenumbersPRE = linenumbersPRE + '<div class="LineNumber"><br></div>';
+
+				          revisionlinenumbersPRE = revisionlinenumbersPRE + '<div class="LineNumber"><span id="RL' + sourcecodeline.revisionDetail.linenumber + '">' 
+				                                                        + sourcecodeline.revisionDetail.linenumber + '</span></div>';
+						  break;
+						default:
+						}
+					
+				
+                    } else {
+	                  
+	                revisionlinenumbersPRE = revisionlinenumbersPRE + '<div class="LineNumber"><br></div>';
+				
+			        linenumbersPRE = linenumbersPRE + '<div class="LineNumber"><span id="L' + sourcecodeline.linenumber +
+			                                          '" rel="#L' + sourcecodeline.linenumber + '" onClick="codeLineSelected(\'LC' +
+			                                          sourcecodeline.linenumber + '\')">' + sourcecodeline.linenumber + 
+			                                          '</span></div>';	
+                    }
+
+                    if(sourcecodeline.revisionType){
+	                  sourcelinesPRE = sourcelinesPRE + '<div class="CodeLine" id="REV' + sourcecodeline.linenumber + '" style="background-color: red;"><span>' +
+			                                           sourcecodeline.revisionDetail.codeline + '</span></div>';  
+					  if (sourcecodeline.revisionType == "changed"){
+					  	  if(sourcecodeline.codeline){
+				            sourcelinesPRE = sourcelinesPRE + '<div class="CodeLine" id="LC' + sourcecodeline.linenumber + '" style="background-color: transparent;"><span>' +
+				                                             sourcecodeline.codeline + '</span></div>';
+				          } else {
+				            sourcelinesPRE = sourcelinesPRE + '<div class="CodeLine" id="LC' + sourcecodeline.linenumber + '" style="background-color: transparent;"><br></div>';
+				          }
+					  }               
+					
+					} else {
+
+			          if(sourcecodeline.codeline){
+			            sourcelinesPRE = sourcelinesPRE + '<div class="CodeLine" id="LC' + sourcecodeline.linenumber + '" style="background-color: transparent;"><span>' +
+			                                             sourcecodeline.codeline + '</span></div>';
+			          } else {
+			            sourcelinesPRE = sourcelinesPRE + '<div class="CodeLine" id="LC' + sourcecodeline.linenumber + '" style="background-color: transparent;"><br></div>';
+			          }
+			        }
+			
+			      });	
+
+			      linenumbersPRE = linenumbersPRE + '</pre></td>';
+			      sourcelinesPRE = sourcelinesPRE + '</pre></div></td>';
+
+			      innerHTML = innerHTML + linenumbersPRE + revisionlinenumbersPRE + sourcelinesPRE + '</tr></tbody></table></div>';
+			
+			      document.getElementById('ABAPCodeReview').innerHTML = innerHTML;
+			
+        }}); 
+      }
+
+     getActivity();
+
+	</script>
+	
+</body>	
+</html>

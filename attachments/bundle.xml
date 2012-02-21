@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="ABAP Code Review" 
+  description="Streamworks ABAP Code Review"
+  author="Alisdair Templeton"
+  author_email="alisdair73@gmail.com" 
+  title_url="http://alisdair73.iriscouch.com/codereview"
+  thumbnail="http://alisdair73.iriscouch.com/codereview/_design/app/images/documentation.png">
+  <Require feature="dynamic-height"/>
+  </ModulePrefs>
+ <Content type="html">
+	<![CDATA[
+	  <link href="https://alisdair73.iriscouch.com/codereview/_design/app/stylesheet/ABAPCodeReview.css" media="screen" rel="stylesheet" type="text/css">
+	<script src="https://alisdair73.iriscouch.com/codereview/_design/app/javascript/ABAPCodeReview.js"></script>		
+	  <script type="text/javascript">	
+	    gadgets.util.registerOnLoadHandler(function(){
+	                                                   RenderControl(document.getElementById('ABAPCodeReview'),parent.CSTAR.activities.activity_id); 
+	                                       });
+	  </script>
+
+		<div id="ABAPCodeReview">Loading...</div>
+	]]>
+ </Content>
+</Module>

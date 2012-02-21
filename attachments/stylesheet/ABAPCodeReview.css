@@ -1,0 +1,95 @@
+pre{
+	margin: 0px;
+}
+
+pre, span{
+	font-family: 'Bitstream Vera Sans Mono','Courier',monospace;
+	font-size: 12px;
+}
+
+ul{
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 40px;
+}
+
+li:first-child{
+	background: transparent;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+li{
+	display: list-item;
+	list-style-type: none;
+	float: left;
+	margin: 0 0 0 7px;
+	height: 33px;
+	line-height: 33px;
+	font-size: 11px;
+}
+
+a{
+	color: #4183C4;
+	text-decoration: none;
+}
+.SourceCode{
+	font: 12px 'Bitstream Vera Sans Mono','Courier',monospace;
+	border: 1px solid #CCC;
+	margin-bottom: 1em;
+	position: relative;
+}
+
+.LineNumbers{
+	background-color: #ECECEC;
+	color: #AAA;
+	padding: 1em .5em;
+	border-right: 1px solid #DDD;
+	text-align: right;
+	cursor: pointer;
+}
+
+.CodeLines{
+	padding-left: 1em;
+}
+
+.meta{
+	padding: 5px 10px;
+	overflow: hidden;
+	font-size: 12px;
+	height: 33px;
+	text-align: left;
+	color: #555;
+	text-shadow: 0 1px 0 white;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+.info{
+	float: left;
+	height: 33px;
+	line-height: 33px;
+}
+
+.icon{
+	line-height: 0;
+	float: left;
+	margin: 5px 5px 0 0;
+	padding: 3px;
+	background: #F7F7F7;
+	border: 1px solid #CCC;
+	border-right-color: #E5E5E5;
+	border-bottom-color: #E5E5E5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.actions{
+	float: right;
+	height: 33px;
+	line-height: 33px;
+}
